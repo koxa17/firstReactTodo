@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import FormTodo from './content/FormTodo'
 import TodoList from './content/TodoList'
+import SortPanel from './content/SortPanel'
 
 const TODOS = [
   {
@@ -64,7 +65,15 @@ export default class Content extends Component {
     return (
       <section className={'content'}>
         <FormTodo addTodo={this.addTodo} />
-        <TodoList todos={TODOS} delTodo={this.delTodo} doneTodo={this.doneTodo} />
+
+        {TODOS.length ? (
+          <Fragment>
+            <SortPanel />
+            <TodoList todos={TODOS} delTodo={this.delTodo} doneTodo={this.doneTodo} />
+          </Fragment>
+        ) : (
+          <h3 className="text-center">Список задач пуст</h3>
+        )}
       </section>
     )
   }
